@@ -1,33 +1,37 @@
-# Coffee
-
 library(shiny)
 
 # Define UI ----
 ui <- fluidPage(
-  titlePanel("censusVis"),
+  titlePanel("Coffee!!!"),
   
   sidebarLayout(
     sidebarPanel(
       
-      selectInput("var", 
-                  label = "Choose a variable to display",
-                  choices = list("Monday", 
-                                 "Tuesday",
-                                 "Wednesday", 
-                                 "Thursday",
-                                 "Friday",
-                                 "Saturday",
-                                 "Sunday"),
-                  selected = "Monday"),
+      selectInput("Meals",
+                  label = "Meals?",
+                  choices = list("Yes", 
+                                 "No",
+                                 "No Preference"),
+                  selected = "Yes"),
       
-      sliderInput("range", 
-                  label = "Open Hour",
-                  min = 0, max = 2400, value = c(0, 1000))
-      ),
+      selectInput("Parking", 
+                  label = "Parking?",
+                  choices = list("Yes", 
+                                 "No",
+                                 "No Preference"),
+                  selected = "Yes"),
+      
+      selectInput("Outdoor Seating",
+                  label = "Outdoor Seating?",
+                  choices = list("Yes", 
+                                 "No",
+                                 "No Preference"),
+                  selected = "Yes")
+    ), 
     
     mainPanel()
   )
-  )
+)
 
 # Define server logic ----
 server <- function(input, output) {
