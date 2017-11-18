@@ -33,8 +33,8 @@ ui <- fluidPage(
     mainPanel(
       fluidRow(
         DT::dataTableOutput("table")
+      )
     )
-  )
   )
 )
 
@@ -47,15 +47,16 @@ server <- function(input, output) {
   # Filter data based on selections
   output$table <- DT::renderDataTable(DT::datatable({
     data <- coffee_data
-    if (input$meals != "No Preference") {
-      data <- data[data$meals == input$meals,]
-    }
-    if (input$parking != "No Preference") {
-      data <- data[data$parking == input$parking,]
-    }
-    if (input$outdoor != "No Preference") {
-      data <- data[data$outdoor == input$outdoor,]
-    }
+    ifelse(input$meals != "No Preference",
+           data <- data,
+           data <- data[data$meals == input$meals,])
+    ifelse(input$parking != "No Preference",
+           data <- data,
+           data <- data[data$parking == input$parking,])
+    ifelse(input$outdoor != "No Preference",
+           data <- data,
+           data <- data[data$outdoor == input$outdoor,])
+    data <- data %>% select(name,meals, parking, outdoor)
     data
   }))
   
